@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hykathon-2</title>
+  <link rel="stylesheet" href="../style1.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-left">
+      <h1 class="navbar-heading-left">Personal Blogging App</h1>
+    </div>
+    <div class="navbar-right">
+      <h1 class="navbar-heading-right"><a href="./signup.html" class="signup-link">Sign-up</a></h1>
+
+
+    </div>
+  </nav>
+
+  <header class="main-header">
+    <div class="header-content">
+      <h1 class="header-heading-left">LOGIN</h1>
+    </div>
+  </header>
+  <div class="centered-div">
+    <input type="email" class="input-field" id="email" placeholder="email">
+    <input type="password" class="input-field" id="password" placeholder="password">
+    <button id="btn">Login</button>
+
+
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
+    import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBt188vnWkweJ7IdLBFDYAIMaaEaZ2ZfXg",
+      authDomain: "hykathon-2.firebaseapp.com",
+      databaseURL: "https://hykathon-2-default-rtdb.firebaseio.com",
+      projectId: "hykathon-2",
+      storageBucket: "hykathon-2.appspot.com",
+      messagingSenderId: "346926617999",
+      appId: "1:346926617999:web:65848ac980a26e7be9e7fa"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const database = getDatabase(app);
+
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          // Update last login timestamp in the database
+          const dt = new Date();
+          update(ref(database, 'users/' + user.uid), {
+            last_login: dt,
+            // ...
+          });
+
+          alert("User signed in");
+          // You can redirect or perform other actions after successful sign-in
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(`Error: ${errorMessage}`);
+          alert("Error occurred"); // Moved this line to display the error message
+        });
+    });
+  </script>
+</body>
+
+</html>
