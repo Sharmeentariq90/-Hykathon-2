@@ -63,7 +63,7 @@ input {
 
 .centered-div {
   width: 416px;
-  height: 259px;
+  height: 459px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -80,20 +80,25 @@ input {
   margin-top: 15px;
   border: 1px solid #ccc;
   border-radius: 5px; 
-  margin: 25px;
+  margin: 10px;
 
 }
 
-#btn {
+#signup {
  
   display: inline-flex;
   padding: 10px 16px;
   align-items: flex-start;
   gap: 8px;
   border-radius: 6px;
-  background: var(--primary-color, #7749F8);
+  background: var(--primary-color, #7749F8);}
 
-}
+  #signup a{
+    text-decoration: none;
+
+  }
+
+
 .login-link {
   color: white;
   text-decoration: none;

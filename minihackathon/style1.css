@@ -85,6 +85,7 @@ input {
 }
 
 #btn {
+  margin-top: 25px;
   padding: 45px;
   display: inline-flex;
   padding: 10px 16px;
@@ -92,6 +93,9 @@ input {
   gap: 8px;
   border-radius: 6px;
   background: var(--primary-color, #7749F8);
+}
+#btn a{
+  text-decoration: none;
 }
 
 .signup-link {
